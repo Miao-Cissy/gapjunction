@@ -29,12 +29,12 @@ C<sub>B</sub> = 500 pF,
 2. Problems with modelling
 3. The model we ended up building
 4. Experiments
-  1. Calculate baseline values through graphs
-    1. Conductance
-    2. Coupling coefficients
-  2. Adapting model to retzius leech parameters
-    1. Using Jonathan's values for both neurons
-  3. Checking phase changes
-    1. Change gap junction conducances
-    2. Optional: Input sin waves
-  4. Freestyling with the model
+  5. Calculate baseline values through graphs
+         1. Conductance
+                2. Coupling coefficients
+  6. Adapting model to retzius leech parameters
+         1. Using Jonathan's values for both neurons
+  7. Checking phase changes
+         1. Change gap junction conducances
+                2. Optional: Input sin waves
+  8. Freestyling with the model
