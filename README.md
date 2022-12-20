@@ -24,4 +24,17 @@ C<sub>B</sub> = 500 pF,
 5. Check propagation properties 
 6. Phase changes
 
-
+### Presentation-schema
+1. What are we modelling? (Brief description and paper reference)
+2. Problems with modelling
+3. The model we ended up building
+4. Experiments
+  1. Calculate baseline values through graphs
+    1. Conductance
+    2. Coupling coefficients
+  2. Adapting model to retzius leech parameters
+    1. Using Jonathan's values for both neurons
+  3. Checking phase changes
+    1. Change gap junction conducances
+    2. Optional: Input sin waves
+  4. Freestyling with the model
