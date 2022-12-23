@@ -1,0 +1,167 @@
+begintemplate rezcell
+
+// the value set below is not real Rz cell, more like a classical neuron
+// objref gabaAsyn, gabaBsyn, ampasyn, nmdasyn
+// objref gabaAsyn1, gabaBsyn1, ampasyn1, nmdasyn1
+// objref gabaAsyn2, gabaBsyn2, ampasyn2, nmdasyn2
+objref synstim, stim[3], stim2[3], h[3], insr1, insr2, flex1, flex2
+// objref save_window_, ocbox_, mt, fmechs, NULL 
+// strdef fname, mname
+public init, topol, basic_shape, subsets, geom, biophys, geom_nseg
+public  x, y, z, gid, position, setgid
+public soma, dend, axon, all, somatic, dendritic, axonal
+
+steps_per_ms= 10
+dt= 0.05
+
+proc init() {
+	initaxon()
+	initdend()
+	initsoma()
+	segments()
+	topol()
+	// new_experiment()
+	x = y = z = 0 // position
+}
+
+create soma,dend, axon
+
+
+proc topol() {
+	connect axon(0), soma(0.5)
+	connect dend(0), axon(0.2)
+}
+
+proc segments() {
+	soma.nseg = 1
+	dend.nseg = 5
+	axon.nseg = 5
+}
+
+proc initsoma(){
+	soma {
+	
+	// basic value
+	insert pas
+	insert k_ion
+	insert na_ion
+	cm =   0.90  //global membrane capac.
+	// global reversal potentials
+	ek =  -95.
+	e_pas =  -65.
+	ena =   50.
+	vca =   125.
+
+	// insert kalium
+	insert naf
+	gbar_naf = 0.20
+	insert kdr
+	gbar_kdr = 0.17
+	insert kc
+	gbar_kc =   0.016
+	insert ka
+	gbar_ka =   0.02
+	insert km
+	gbar_km =   0.01
+	insert kahp
+	gbar_kahp =   0.0002
+	insert cal
+	gbar_cal =   0.004
+	insert cad
+	// *** ca diffusion: beta=1/tau
+	beta_cad  =   0.01
+	// cafor(I) (FORTRAN) converted to phi (NEURON)
+	phi_cad =   4333.33333 
+
+
+	// passive 
+	g_pas =   2.E-05
+	Ra =   250.
+    }
+
+	// stim[0]= new IClamp(soma(0.5))
+	// stim[1]= new IClamp(soma(0.5))
+	// stim[2]= new VClamp(soma(0.5))
+	
+}
+
+proc initdend(){
+
+	dend{
+
+	insert naf
+	insert pas
+	gbar_naf = 0.030
+	insert kdr
+	gbar_kdr = 0.075
+	insert kc
+	gbar_kc =   0.016
+	insert ka
+	gbar_ka = 0.008
+	insert km
+	gbar_km =   0.02
+	insert kahp
+	gbar_kahp = 0.0002
+	insert cal
+	gbar_cal = 0.004
+	insert cad
+	// *** ca diffusion: beta=1/tau
+	beta_cad  =   0.01
+	// cafor(I) (FORTRAN) converted to phi (NEURON)
+	phi_cad =   4333.33333 
+
+
+	// basic value
+	cm =   0.80  //global membrane capac. original 0.90, change it to 0.8
+	// global reversal potentials
+	ek =  -95.
+	e_pas =  -70.
+	ena =   50.
+	vca =   125.
+
+	// passive
+	g_pas =   2.E-05
+	Ra =   200.
+	}
+
+}
+
+proc initaxon(){
+	axon{
+	insert pas
+	g_pas =   0.001
+	Ra =   100.
+
+	insert naf
+	gbar_naf = 0.3 // below  0.30 no spontaneous spikes, I changed it to 0.2, orginal is 0.3
+	insert kdr
+	gbar_kdr = 0.45
+	insert ka
+	gbar_ka =   0.0006
+	insert km
+	gbar_km =   0.04
+
+	// basic things
+	cm =   0.90  //global membrane capac.
+	// global reversal potentials
+	ek =  -95.
+	e_pas =  -70.
+	ena =   50.
+	vca =   125.
+
+	// passive 
+	g_pas =   0.001
+	Ra =   100.
+	}
+}
+
+proc position() { local i
+	soma for i = 0, n3d()-1 {
+		pt3dchange(i, $1-x+x3d(i), $2-y+y3d(i), $3-z+z3d(i),diam3d(i))
+	}
+	x=$1 y=$2 z=$3
+}
+
+proc setgid() { gid=$1 }
+
+endtemplate rezcell

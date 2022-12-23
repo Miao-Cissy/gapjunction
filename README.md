@@ -1,6 +1,11 @@
 # gapjunction
 
-Code for simulation of Rz cell gapjunction of leech.
+Code for the pracitcal class 2022 ws, the simulation of Rz cell gapjunction of leech.
+
+### Intro
+1. Code is referred from paper https://www.nature.com/articles/s41598-018-30966-w, https://www.sciencedirect.com/science/article/abs/pii/S0306452209009907?via%3Dihub, and model by Vladimirov et al. 2012 published on ModelDB (Converted to Python by Kay Thurley (2022)). 
+2. Our change is mainly in my_rz.hoc, my_connection.hoc, calculate_cc.ipynb, Calcualte_gc.ipynb.
+
 
 ### Parameters from real recordings:
 Given Retzius cells A and B connected by a gapjunction:

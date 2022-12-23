@@ -1,4 +1,4 @@
-begintemplate rezcell
+begintemplate real_rzcell
 // objref gabaAsyn, gabaBsyn, ampasyn, nmdasyn
 // objref gabaAsyn1, gabaBsyn1, ampasyn1, nmdasyn1
 // objref gabaAsyn2, gabaBsyn2, ampasyn2, nmdasyn2
@@ -43,16 +43,16 @@ proc initsoma(){
 	insert pas
 	insert k_ion
 	insert na_ion
-	cm =   0.90  //global membrane capac.
+	cm =   1  //global membrane capac.
 	// global reversal potentials
-	ek =  -95.
-	e_pas =  -70.
+	ek =  -77.
+	e_pas =  -40.
 	ena =   50.
 	vca =   125.
 
 	// insert kalium
 	insert naf
-	gbar_naf = 0.20
+	gbar_naf = 0.125
 	insert kdr
 	gbar_kdr = 0.17
 	insert kc
@@ -74,7 +74,13 @@ proc initsoma(){
 
 	// passive 
 	g_pas =   2.E-05
-	Ra =   250.
+	// Ra =   250.
+	Ri = 23
+
+
+	// morph
+	L= 80
+	diam = 80
     }
 
 	// stim[0]= new IClamp(soma(0.5))
@@ -112,14 +118,17 @@ proc initdend(){
 	// basic value
 	cm =   0.80  //global membrane capac. original 0.90, change it to 0.8
 	// global reversal potentials
-	ek =  -95.
-	e_pas =  -70.
+	ek =  -77.
+	e_pas =  -40.
 	ena =   50.
 	vca =   125.
 
 	// passive
 	g_pas =   2.E-05
 	Ra =   200.
+
+	L = 100
+	diam = 1
 	}
 
 }
@@ -142,14 +151,17 @@ proc initaxon(){
 	// basic things
 	cm =   0.90  //global membrane capac.
 	// global reversal potentials
-	ek =  -95.
-	e_pas =  -70.
+	ek =  -77.
+	e_pas =  -40.
 	ena =   50.
 	vca =   125.
 
 	// passive 
 	g_pas =   0.001
 	Ra =   100.
+
+	L = 100
+	diam = 20
 	}
 }
 
@@ -162,4 +174,4 @@ proc position() { local i
 
 proc setgid() { gid=$1 }
 
-endtemplate rezcell
+endtemplate real_rzcell
